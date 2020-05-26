@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>wikiGuess</title>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1,  maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" href="css/styles.css">
+<script>
+    var url = "https://en.wikipedia.org/w/api.php"; 
+
+var params = {
+    action: "query",
+    format: "json",
+    list: "random",
+    rnlimit: "15"
+};
+
+url = url + "?origin=*";
+Object.keys(params).forEach(function(key){
+	
+	
+	
+	url += "&" + key + "=" + params[key];
+	console.log(key+ 
+				"= "+
+				params[key]+
+				" ="+
+				url);
+	});
+
+fetch(url)
+    .then(function(response){return response.json();})
+    .then(function(response) {
+		console.log(response);
+        var randoms = response.query.random;
+        for (var r in randoms) {
+            console.log(randoms[r].title);
+			
+			//testing
+			console.log(randoms[r]);
+        }
+    })
+    .catch(function(error){console.log(error);});
+</script>
+		
+	</head>
+	<body>
+		<canvas id="wikimaster" width="500" height="300">
+			
+		</canvas>
+	</body>
+</html>
